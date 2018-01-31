@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Let's fix the funding shortfall in the NHS!">
+    <meta name="author" content="Alex Mole">
+
+    <title>Let's fix the funding shortfall in the NHS!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Let's re-fund our NHS!</h1>
+          <div class="row">
+            <!--div class="col-md-4 offset-md-4">
+                <blockquote class="twitter-video" data-lang="en"><p lang="en" dir="ltr">“Let us refuse to allow this government to take the humanity out of our NHS. Let us do everything we possibly can to fight for the NHS.“<br>If you agree with Dr Gavaghan, hit share ? <a href="https://t.co/EQFaA95eBE">pic.twitter.com/EQFaA95eBE</a></p>&mdash; The Labour Party (@UKLabour) <a href="https://twitter.com/UKLabour/status/957229224577794049?ref_src=twsrc%5Etfw">January 27, 2018</a></blockquote>
+            </div-->
+          </div>
+          <p>Many of us share a feeling that we'd pay a little more tax if we knew it was going to the NHS. <strong>So what if we just made our own tax budget and made that happen?</strong></p>
+          <p>This page will help you figure out how much money an extra 1% of tax would be for you, and help you find the page for your local NHS trust so you can set up a monthly payment of that amount.
+             If we all chipped in a percent or two, it wouldn't affect us too much, but it <strong>would mean the world for our NHS</strong>.</p>
+          <p>This tool will help you calculate how much 1% extra tax would be for you, and will link you to NHS Trust charities that you can set up a monthly donation to.</p>
+        </div>
+      </div>
+
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-md-5">
+            <h2>How much is an extra 1% tax for me?</h2>
+            <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.</p>
+            <p><small><em>We never store or share any of this information - in fact, it never leaves your browser.</em></small></p>
+
+            <p>Before tax, I earn</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">&pound;</span>
+              </div>
+                <input type="text" class="form-control" placeholder="" aria-label="Gross Income" aria-describedby="basic-addon1">
+            </div>
+
+            <p>every</p>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="periodmonth" autocomplete="off" checked> month
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="periodyear" autocomplete="off"> year
+              </label>
+            </div>
+
+            <p>Looking at this tax rate:</p>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="options" id="rate1flat" autocomplete="off" checked> 1% flat
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="rate2flat" autocomplete="off"> 2% flat
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="options" id="rate1prog" autocomplete="off"> 1%+ progressive
+              </label>
+            </div>
+            <div id="rateinfo"></div>
+
+
+            <p class="result">works out as &pound;<span id="taxcalc">xx.xx</span> per month</p>
+          </div>
+
+          <div class="col-md-1">&nbsp;</div>
+          <div class="col-md-5">
+            <h2>Where do I pay?</h2>
+            <p>NHS hospitals are run by trusts, and each trust has a partner charity. Let's try and find you a link so you can set up a monthly donation!</p>
+          </div>
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+      <p>&copy; Alex Mole, 2018</p>
+      <p>This site is in no way affiliated with the NHS, it's just an institution that I dearly love and hope to help!</p>
+      <p>if you have comments or queries, please send them to me on Twitter: <a href="https://twitter.com/TheRealMolen">@TheRealMolen</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/nhs.js"></script>
+    <!--script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script-->
+  </body>
+</html>
