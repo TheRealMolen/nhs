@@ -16,22 +16,40 @@
   </head>
 
   <body>
+    
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+      <a class="navbar-brand" href="#">NHS Top-up</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">The NHS needs our help.</h1>
-          
+          <h1 class="display-3 mb-4">The NHS needs our help.</h1>
+
           <p>Many of us share a feeling that we'd pay a little more tax if we knew it was going to the NHS.
             In fact, <a href="https://www.mirror.co.uk/news/politics/three-quarters-brits-would-pay-11955709">this survey</a> recently found that up to three-quarters of Brits would be happy to pay more to support the NHS.
             <strong>So let's do that!</strong></p>
           <p>Most NHS Trusts have a charity that you can easily set up monthly payments to, and the money will go straight into improving care in our NHS.</p>
           <p>This page will help you figure out how much money an extra 1% of tax would be for you, and help you find the page for your local NHS trust so you can set up a monthly payment of that amount.
              If we all chipped in a percent or two, it wouldn't affect us too much, but it <strong>would mean the world for our NHS</strong>.</p>
-          <p><i><small>Please note that this page is in no way associated with the NHS. I've made every attempt to make sure that the information and links it provides are
-            correct and safe, but I can't provide any guarantees of accuracy.</small></i></p>
+          <p><i><small>Please note that this page is in no way associated with the NHS. We've made every attempt to make sure that the information and links it provides are
+            correct and safe, but we can't provide any guarantees of accuracy.</small></i></p>
         </div>
       </div>
 
@@ -40,11 +58,11 @@
         <div class="row justify-content-center">
           <div class="col-md-5">
             <h2>How much is an extra 1% tax for me?</h2>
-            <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.</p>
-            <p><small><em>We never store or share any of this information - in fact, it never leaves your browser.</em></small></p>
+            <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.
+              <small><em>We never store or share any of this information - in fact, it never leaves your browser.</em></small></p>
 
             <p>Before tax, I earn</p>
-            <div class="input-group mb-3">
+            <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">&pound;</span>
               </div>
@@ -67,13 +85,9 @@
                 <input type="radio" name="options" id="rate1flat" autocomplete="off" checked> 1% flat
               </label>
               <label class="btn btn-primary">
-                <input type="radio" name="options" id="rate2flat" autocomplete="off"> 2% flat
-              </label>
-              <label class="btn btn-primary">
                 <input type="radio" name="options" id="rate1prog" autocomplete="off"> 1%+ progressive
               </label>
             </div>
-            <div id="rateinfo"></div>
 
 
             <p class="result">works out as &pound;<span id="taxcalc">xx.xx</span> per month</p>
@@ -84,6 +98,13 @@
             <h2>Where can I pay?</h2>
             <p>NHS hospitals are run by trusts, and each trust has a partner charity. Let's try and find you a link so you can set up a monthly donation!</p>
             <div class="float-right"><a href="https://www.nhs.uk"><img src="data/nhs-choices.jpg" alt="Data supplied by NHS Choices"></a></div>
+
+            <div id="postcode-group" class="input-group mb-3">
+                <input id="your-postcode" type="text" class="form-control" placeholder="Your postcode" aria-label="Your postcode" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button id="find-trusts" class="btn btn-outline-secondary" type="button">Find NHS Trusts</button>
+                </div>
+              </div>
           </div>
         </div>
 
@@ -102,8 +123,10 @@
       </small>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/postcode.js"></script>
     <script src="js/nhs.js"></script>
   </body>
 </html>
