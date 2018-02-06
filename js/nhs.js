@@ -17,8 +17,8 @@
 
         var baserate=1,hirate=1,addrate=1;
         if( $("#rate1prog").is(':checked') ) {
-            hirate=2;
-            addrate=3;
+            hirate=1.5;
+            addrate=2;
         }
         
         // Tax Bands: https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands
@@ -48,7 +48,7 @@
         }
 
         var monthlytax = Math.floor(tax / 12);
-        
+
         $("#taxcalc").text( monthlytax );
         $("#tax-result").show();
     };
