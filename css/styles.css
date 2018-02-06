@@ -8,4 +8,15 @@ body {
     padding-right: 0;
 }
 
+.socialbtn {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fb-like {
+    /* ew */
+    position: relative;
+    top: -4px;
+}
+
 

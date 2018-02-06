@@ -34,7 +34,19 @@
   </head>
 
   <body>
-    
+
+    <!-- social includes -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <!-- =========================== -->
+
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
       <a class="navbar-brand" href="#">NHS Top-up</a>
 
@@ -45,7 +57,6 @@
 
     <main role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron pb-3">
         <div class="container">
           <h1 class="display-3 d-none d-sm-block mb-4"><strong>The NHS needs our help.</strong></h1>
@@ -60,10 +71,15 @@
           <p><i><small>Please note that this page is in no way associated with the NHS. We've made every attempt to make sure that the information and links it provides are
             correct and safe, but we can't provide any guarantees of accuracy.</small></i></p>
 
-          <p>Please share this site with your friends!
-              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="The NHS needs our help!" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-              <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Ftherealmolen.github.io%2Fnhs%2F&layout=button_count&size=small&mobile_iframe=true&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-          </p>
+          <div>
+              <span>Please share this site with your friends!</span>
+              <div class="socialbtn">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="The NHS needs our help!" data-show-count="false">Tweet</a>
+              </div>
+              <div class="socialbtn">
+                <div class="fb-like" data-href="https://therealmolen.github.io/nhs/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+              </div>
+          </div>
         </div>
       </div>
 
