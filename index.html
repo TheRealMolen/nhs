@@ -19,28 +19,19 @@
     
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
       <a class="navbar-brand" href="#">NHS Top-up</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
+      <div class="collapse navbar-collapse"></div>
+
+      <img src="/data/heart-nhs.png" height="40" alt="we love the nhs">
     </nav>
 
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron pb-3">
         <div class="container">
-          <h1 class="display-3 mb-4">The NHS needs our help.</h1>
+          <h1 class="display-3 d-none d-sm-block mb-4"><strong>The NHS needs our help.</strong></h1>
+          <h4 class="d-block d-sm-none pt-4 mb-4"><strong>The NHS needs our help.</strong></h1>
 
           <p>Many of us share a feeling that we'd pay a little more tax if we knew it was going to the NHS.
             In fact, <a href="https://www.mirror.co.uk/news/politics/three-quarters-brits-would-pay-11955709">this survey</a> recently found that up to three-quarters of Brits would be happy to pay more to support the NHS.
@@ -58,39 +49,49 @@
         <div class="row justify-content-center">
           <div class="col-md-5">
             <h2>How much is an extra 1% tax for me?</h2>
-            <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.
-              <small><em>We never store or share any of this information - in fact, it never leaves your browser.</em></small></p>
+            <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.</p>
+            <p>The <strong>1% flat</strong> option calculates 1% extra tax across everything above your tax-free allowance.
+              The <strong>1+% progressive</strong> option calculates 1% base rate, 2% for the next &pound;33,500 (the <em>higher</em> rate),
+              and then 3% for anything above &pound;150,000 (the <em>additional rate</em>).</p>
+            <p><small>We never store or share any of this information - in fact, it never leaves your browser.</small></p>
 
-            <p>Before tax, I earn</p>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">&pound;</span>
+            <p class="mb-1">Before tax, I earn</p>
+            <div class="container mb-2">
+              <div class="row tight-h">
+                <div class="col input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">&pound;</span>
+                  </div>
+                  <input type="number" id="gross-income" class="form-control" placeholder="Gross Income" aria-label="Gross Income" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="col">
+                  <span class="px-1">every</span>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+                      <input type="radio" name="period" id="periodmonth" autocomplete="off" checked> month
+                    </label>
+                    <label class="btn btn-primary">
+                      <input type="radio" name="period" id="periodyear" autocomplete="off"> year
+                    </label>
+                  </div>
+                </div>
               </div>
-                <input type="text" class="form-control" placeholder="" aria-label="Gross Income" aria-describedby="basic-addon1">
             </div>
 
-            <p>every</p>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="options" id="periodmonth" autocomplete="off" checked> month
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="options" id="periodyear" autocomplete="off"> year
-              </label>
+            <div class="mb-2">
+              <span class="mb-1">Looking at this tax rate:</span>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="rate" id="rate1flat" autocomplete="off" checked> 1% flat
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="rate" id="rate1prog" autocomplete="off"> 1+% progressive
+                </label>
+              </div>
             </div>
 
-            <p>Looking at this tax rate:</p>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="options" id="rate1flat" autocomplete="off" checked> 1% flat
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="options" id="rate1prog" autocomplete="off"> 1%+ progressive
-              </label>
-            </div>
-
-
-            <p class="result">works out as &pound;<span id="taxcalc">xx.xx</span> per month</p>
+            <p id="tax-result" style="display:none">Means an extra <strong>&pound;<span id="taxcalc">xx.xx</span></strong> per month for the NHS.</p>
           </div>
 
           <div class="col-md-1">&nbsp;</div>
@@ -109,10 +110,13 @@
             <div id="trust-info"></div>
 
             <script id="templ-trustname" type="text/template">
-              <p>The NHS Trust that runs your nearest hospital is <a href="{{trustsite}}" target="_blank">{{trustname}}</a>.</p>
+              <p>The NHS Trust that runs your nearest hospital is the <strong><a href="{{trustsite}}" target="_blank">{{trustname}}</a></strong>.</p>
+            </script>
+            <script id="templ-trustnamenosite" type="text/template">
+              <p>The NHS Trust that runs your nearest hospital is the <strong>{{trustname}}</strong>.</p>
             </script>
             <script id="templ-charity" type="text/template">
-              <p>You can read about their charity <a href="{{charitysite}}" target="_blank">here</a>.</p>
+              <p>You can read about their charity <strong><a href="{{charitysite}}" target="_blank">here</a></strong>.</p>
             </script>
             <script id="templ-nocharity" type="text/template">
               <p>We haven't been able to find any more information about their charity. If you can find any information
@@ -120,7 +124,7 @@
               </p>
             </script>
             <script id="templ-donation" type="text/template">
-              <p>You can set up a monthly donation <a href="{{donationsite}}" target="_blank">here</a>. Many Trusts will let you
+              <p>You can set up a monthly donation <strong><a href="{{donationsite}}" target="_blank">here</a></strong>. Many Trusts will let you
                 specify a department for your donation, but if you either leave this blank or choose "general", it
                 will allow the Trust to use the donation wherever it makes the most sense -- whether that's new
                 scanning equipment, building upgrades, or just new teaspoons.
@@ -137,18 +141,18 @@
           </div>
         </div>
 
-        <hr>
-
       </div> <!-- /container -->
 
     </main>
 
+    <hr class="mt-5">
+    
     <footer class="container">
       <small>
         <p>&copy; Alex Mole, 2018</p>
-        <p>This site is in no way affiliated with the NHS, it's just an institution that I dearly love and hope to help!</p>
-        <p>if you have comments or queries, please send them to me on Twitter: <a href="https://twitter.com/TheRealMolen">@TheRealMolen</a></p>
-        <p>The hospital trust lookup uses a cached version of NHS Choices data, taken from here: <a href="https://www.nhs.uk/aboutNHSChoices/aboutnhschoices/how-we-perform/Pages/datasets.aspx">https://www.nhs.uk/aboutNHSChoices/aboutnhschoices/how-we-perform/Pages/datasets.aspx</a></p>
+        <p>This site is in no way affiliated with the NHS, it's just an institution that I dearly love and hope to help!
+          If you have comments or queries, please send them to me on Twitter: <a href="https://twitter.com/TheRealMolen">@TheRealMolen</a></p>
+        <p>The hospital trust lookup uses a filtered version of NHS Choices data, taken from here: <a href="https://www.nhs.uk/aboutNHSChoices/aboutnhschoices/how-we-perform/Pages/datasets.aspx">https://www.nhs.uk/aboutNHSChoices/aboutnhschoices/how-we-perform/Pages/datasets.aspx</a></p>
       </small>
     </footer>
 

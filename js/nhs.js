@@ -3,6 +3,58 @@
     'use strict';
 
 
+    var recalcTax = function() {
+        var income = $("#gross-income").val();
+        if( Number.isNaN(income) ) {
+            $("#tax-result").hide();
+            return;
+        }
+
+        income = +income;
+        if( $("#periodmonth").is(':checked') ) {
+            income *= 12;
+        }
+
+        var baserate=1,hirate=1,addrate=1;
+        if( $("#rate1prog").is(':checked') ) {
+            hirate=2;
+            addrate=3;
+        }
+        
+        // Tax Bands: https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past#tax-rates-and-bands
+        var addband = 150000;
+        var hiband = 33500;
+        var allowance = 11500;
+        if( income > 100000 ) {
+            allowance -= (income - 100000) / 2;
+            if( allowance < 0 )
+                allowance = 0;
+        }
+
+        var tax = 0;
+        var taxable = income - allowance;
+        if( taxable > 0 ) {
+            if( taxable > addband ) {
+                tax += addrate * (taxable - addband);
+                taxable = addband;
+            }
+            if( taxable > 33500 ) {
+                tax += hirate * (taxable - 33500);
+                taxable = 33500;
+            }
+            tax += baserate * taxable;
+
+            tax /= 100;
+        }
+
+        var monthlytax = Math.floor(tax / 12);
+        
+        $("#taxcalc").text( monthlytax );
+        $("#tax-result").show();
+    };
+
+
+
     var toRadians = function(deg) { return deg * Math.PI / 180; };
 
     // calculate the distance between two points based on latitude & longitude
@@ -106,7 +158,7 @@
                 };
 
                 var html = '';
-                html += Mustache.to_html($('#templ-trustname').html(), templateinfo);
+                html += Mustache.to_html($('#templ-trustname' + (templateinfo.trustsite?'':'nosite')).html(), templateinfo);
                 html += Mustache.to_html($('#templ-' + (templateinfo.charitysite?'':'no') + 'charity').html(), templateinfo);
                 html += Mustache.to_html($('#templ-' + (templateinfo.donationsite?'':'no') + 'donation').html(), templateinfo);
 
@@ -115,5 +167,10 @@
         };
     };
 
+    $("#gross-income").on('keyup', recalcTax);
+    $("#periodmonth").on('change', recalcTax);
+    $("#periodyear").on('change', recalcTax);
+    $("#rate1flat").on('change', recalcTax);
+    $("#rate1prog").on('change', recalcTax);
     $("#find-trusts").on('click', findNhsTrusts);
 }());
