@@ -22,7 +22,10 @@
         return R * c;
     };
 
-    var getClosestHospital = function(lat,long) {
+    var getClosestHospital = function(lat,long, hlist) {
+        if(typeof(hlist) === 'undefined')
+            hlist = hospitals;
+
         lat = +lat;
         long = +long;
 
@@ -44,10 +47,39 @@
     // lazy load data
     var hospitals = false;
     var charities = false;
+    var hospitalsCleaned = false;
     var hprom = d3.csv( 'data/NHSHospitals.csv', function(data) { 
         hospitals = data; });
     var cprom = d3.csv( 'data/NHSCharities.csv', function(data) { 
         charities = data; });
+
+    var ensureHospitalsCleaned = function() {
+        if( hospitalsCleaned ) return;
+
+        // make a map from trust name -> charity info
+        var trustCharities = {};
+        charities.forEach(function(charity) {
+            trustCharities[charity.Trust] = { CharitySite:charity['Charity Site'], DirectDonation:charity['Direct Donation'] };
+        });
+
+        // inflate all hospitals with charity info
+        hospitals.forEach(function(hospital) {
+            if( typeof(trustCharities[hospital.ParentName]) === 'undefined' ) {
+                hospital.NhsTrust = false;
+                return;
+            }
+
+            var charity = trustCharities[hospital.ParentName];
+            hospital.NhsTrust = true;
+            hospital.CharitySite = charity.CharitySite;
+            hospital.DirectDonation = charity.DirectDonation;
+        });
+
+        // filter out any non-NHS Trust hospitals
+        hospitals = hospitals.filter( function(hospital) { return hospital.NhsTrust; } );
+
+        hospitalsCleaned = true;
+    };
 
     var findNhsTrusts = function() {
         var postcode = new Postcode( $("#your-postcode").val() );
@@ -61,10 +93,24 @@
 
         var handlePostcodeInfo = function(info) {
             Promise.all([hprom,cprom]).then(function(){
+                ensureHospitalsCleaned();
 
-                var myHospital = getClosestHospital(+info.result.latitude, +info.result.longitude);
+                var hospital = getClosestHospital(+info.result.latitude, +info.result.longitude);
 
-                console.log(myHospital);
+                var templateinfo = {
+                    hospitalname: hospital.OrganisationName,
+                    trustname: hospital.ParentName,
+                    trustsite: hospital.Website,
+                    charitysite: hospital.CharitySite,
+                    donationsite: hospital.DirectDonation
+                };
+
+                var html = '';
+                html += Mustache.to_html($('#templ-trustname').html(), templateinfo);
+                html += Mustache.to_html($('#templ-' + (templateinfo.charitysite?'':'no') + 'charity').html(), templateinfo);
+                html += Mustache.to_html($('#templ-' + (templateinfo.donationsite?'':'no') + 'donation').html(), templateinfo);
+
+                $('#trust-info').html(html);
             });
         };
     };

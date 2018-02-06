@@ -100,11 +100,40 @@
             <div class="float-right"><a href="https://www.nhs.uk"><img src="data/nhs-choices.jpg" alt="Data supplied by NHS Choices"></a></div>
 
             <div id="postcode-group" class="input-group mb-3">
-                <input id="your-postcode" type="text" class="form-control" placeholder="Your postcode" aria-label="Your postcode" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button id="find-trusts" class="btn btn-outline-secondary" type="button">Find NHS Trusts</button>
-                </div>
+              <input id="your-postcode" type="text" class="form-control" placeholder="Your postcode" aria-label="Your postcode" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="find-trusts" class="btn btn-outline-secondary" type="button">Find NHS Trusts</button>
               </div>
+            </div>
+
+            <div id="trust-info"></div>
+
+            <script id="templ-trustname" type="text/template">
+              <p>The NHS Trust that runs your nearest hospital is <a href="{{trustsite}}" target="_blank">{{trustname}}</a>.</p>
+            </script>
+            <script id="templ-charity" type="text/template">
+              <p>You can read about their charity <a href="{{charitysite}}" target="_blank">here</a>.</p>
+            </script>
+            <script id="templ-nocharity" type="text/template">
+              <p>We haven't been able to find any more information about their charity. If you can find any information
+                about it, please let us know!</p>
+              </p>
+            </script>
+            <script id="templ-donation" type="text/template">
+              <p>You can set up a monthly donation <a href="{{donationsite}}" target="_blank">here</a>. Many Trusts will let you
+                specify a department for your donation, but if you either leave this blank or choose "general", it
+                will allow the Trust to use the donation wherever it makes the most sense -- whether that's new
+                scanning equipment, building upgrades, or just new teaspoons.
+                <small>We've made every effort to make certain that this link is the right one for the charity, 
+                  but we make no guarantee. Please let us know if you spot anything that's wrong.</small></p>
+            </script>
+            <script id="templ-nodonation" type="text/template">
+              <p>We haven't been able to find a way for you to donate to this charity online. That doesn't mean you
+                can't donate; it just means that you may need to read the charity's or the Trust's site to find
+                information about setting up a direct debit. In a few cases, we haven't been able to find any information
+                at all, so in these cases, please consider getting in touch with the hospital ({{hospitalname}}) and asking how you
+                can donate. If you manage to find an online donation site, please let us know and we'll add it to this site.</p>
+            </script>
           </div>
         </div>
 
@@ -125,6 +154,7 @@
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/mustache.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/postcode.js"></script>
     <script src="js/nhs.js"></script>
