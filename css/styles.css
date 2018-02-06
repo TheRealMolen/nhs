@@ -3,7 +3,7 @@ body {
     padding-top: 1.5rem;
 }
 
-.tight-h .col {
+.tight-h .col-md-6 {
     padding-left: 0;
     padding-right: 0;
 }

@@ -172,5 +172,9 @@
     $("#periodyear").on('change', recalcTax);
     $("#rate1flat").on('change', recalcTax);
     $("#rate1prog").on('change', recalcTax);
+    $("#your-postcode").on('keyup', function(event) {
+        if( event.keyCode === 13 )
+            findNhsTrusts();
+    });
     $("#find-trusts").on('click', findNhsTrusts);
 }());

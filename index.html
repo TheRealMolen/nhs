@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113648224-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-113648224-1');
+    </script>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="NHS Top-up">
@@ -42,6 +52,11 @@
              If we all chipped in a percent or two, it wouldn't affect us too much, but it <strong>would mean the world for our NHS</strong>.</p>
           <p><i><small>Please note that this page is in no way associated with the NHS. We've made every attempt to make sure that the information and links it provides are
             correct and safe, but we can't provide any guarantees of accuracy.</small></i></p>
+
+          <p>Please share this site with your friends!
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="The NHS needs our help!" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Ftherealmolen.github.io%2Fnhs%2F&layout=button_count&size=small&mobile_iframe=true&width=69&height=20&appId" width="69" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          </p>
         </div>
       </div>
 
@@ -51,30 +66,29 @@
           <div class="col-md-5">
             <h2>How much is an extra 1% tax for me?</h2>
             <p>This is a rough-and-ready estimate of how much extra tax you'd pay under various tax options.</p>
-            <p>The <strong>1% flat</strong> option calculates 1% extra tax across everything above your tax-free allowance.
-              The <strong>1+% progressive</strong> option calculates 1% base rate for the first &pound;33,500 above your allowance, 1.5% above that (the <em>higher</em> rate),
-              and then 2% for anything above &pound;150,000 (the <em>additional rate</em>).</p>
             <p><small>We never store or share any of this information - in fact, it never leaves your browser.</small></p>
 
             <p class="mb-1">Before tax, I earn</p>
             <div class="container mb-2">
               <div class="row tight-h">
-                <div class="col input-group">
+                <div class="col-md-6 input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">&pound;</span>
                   </div>
                   <input type="number" id="gross-income" class="form-control" placeholder="Gross Income" aria-label="Gross Income" aria-describedby="basic-addon1">
                 </div>
 
-                <div class="col">
-                  <span class="px-1">every</span>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-primary active">
-                      <input type="radio" name="period" id="periodmonth" autocomplete="off" checked> month
-                    </label>
-                    <label class="btn btn-primary">
-                      <input type="radio" name="period" id="periodyear" autocomplete="off"> year
-                    </label>
+                <div class="col-md-6">
+                  <div class="float-right">
+                    <span class="px-1">every</span>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" name="period" id="periodmonth" autocomplete="off" checked> month
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" name="period" id="periodyear" autocomplete="off"> year
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -93,6 +107,10 @@
             </div>
 
             <p id="tax-result" style="display:none">Means an extra <strong>&pound;<span id="taxcalc">xx.xx</span></strong> per month for the NHS.</p>
+            
+            <p><small>The <strong>1% flat</strong> option calculates 1% extra tax across everything above your tax-free allowance.
+              The <strong>1+% progressive</strong> option calculates 1% base rate for the first &pound;33,500 above your allowance, 1.5% above that (the <em>higher</em> rate),
+              and then 2% for anything above &pound;150,000 (the <em>additional rate</em>).</small></p>
           </div>
 
           <div class="col-md-1">&nbsp;</div>
@@ -128,7 +146,8 @@
               <p>You can set up a monthly donation <strong><a href="{{donationsite}}" target="_blank">here</a></strong>. Many Trusts will let you
                 specify a department for your donation, but if you either leave this blank or choose "general", it
                 will allow the Trust to use the donation wherever it makes the most sense -- whether that's new
-                scanning equipment, building upgrades, or just new teaspoons.
+                scanning equipment, building upgrades, or just new teaspoons. <strong>Please make sure to select Gift Aid!</strong>
+                As long as you're a UK taxpayer, it means that your contribution is worth 25% more to the NHS.
                 <small>We've made every effort to make certain that this link is the right one for the charity, 
                   but we make no guarantee. Please let us know if you spot anything that's wrong.</small></p>
             </script>
