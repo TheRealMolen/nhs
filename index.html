@@ -151,6 +151,15 @@
 
             <div id="trust-info"></div>
 
+            
+            <script id="templ-error" type="text/template">
+              <div class="alert alert-danger" role="alert">{{error}}</div>
+            </script>
+            <script id="templ-donate" type="text/template">
+              <div class="text-center mb-3">
+                <a class="btn btn-primary donate" href="{{donationsite}}" role="button">SET UP DONATION ></a>
+              </div>
+            </script>
             <script id="templ-trustname" type="text/template">
               <p>The NHS Trust that runs your nearest hospital is the <strong><a href="{{trustsite}}" target="_blank">{{trustname}}</a></strong>.</p>
             </script>

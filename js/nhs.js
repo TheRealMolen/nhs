@@ -133,17 +133,42 @@
         hospitalsCleaned = true;
     };
 
+    var searching = false;
     var findNhsTrusts = function() {
+        if( searching ) {
+            console.log( "still searching from before...");
+        }
+
         var postcode = new Postcode( $("#your-postcode").val() );
         if( !postcode.valid() ) {
+            var templateinfo = {error:'There was a problem looking up that postcode. Please be sure to only use full UK postcodes, like SW1A 2AA'};
+            var html = Mustache.to_html($('#templ-error').html(), templateinfo);
+            $('#trust-info').html(html);
             return;
         }
 
+        searching = true;
+        $('#trust-info').html('');
+
         var nicecode = postcode.normalise().replace(' ','');
         $.getJSON( "https://api.postcodes.io/postcodes/" + nicecode + "?callback=?", 
-                   function(info) {handlePostcodeInfo(info);} );
+                   function(info) {handlePostcodeInfo(info);} )
+            .fail(function() {
+                var templateinfo = {error:'There was a problem looking up that postcode. Please check your internet connection and be sure to only use full UK postcodes, like SW1A 2AA'};
+                var html = Mustache.to_html($('#templ-error').html(), templateinfo);
+                $('#trust-info').html(html);
+                searching = false;
+            });
 
         var handlePostcodeInfo = function(info) {
+            if( info.status != 200 ) {
+                var templateinfo = {error:'There was a problem looking up that postcode. Please be sure to only use full UK postcodes, like SW1A 2AA'};
+                var html = Mustache.to_html($('#templ-error').html(), templateinfo);
+                $('#trust-info').html(html);
+                searching = false;
+                return;
+            }
+
             Promise.all([hprom,cprom]).then(function(){
                 ensureHospitalsCleaned();
 
@@ -158,11 +183,16 @@
                 };
 
                 var html = '';
+                if( templateinfo.donationsite ) {
+                    html += Mustache.to_html($('#templ-donate').html(), templateinfo);
+                }
                 html += Mustache.to_html($('#templ-trustname' + (templateinfo.trustsite?'':'nosite')).html(), templateinfo);
                 html += Mustache.to_html($('#templ-' + (templateinfo.charitysite?'':'no') + 'charity').html(), templateinfo);
                 html += Mustache.to_html($('#templ-' + (templateinfo.donationsite?'':'no') + 'donation').html(), templateinfo);
 
                 $('#trust-info').html(html);
+                
+                searching = false;
             });
         };
     };
@@ -177,4 +207,5 @@
             findNhsTrusts();
     });
     $("#find-trusts").on('click', findNhsTrusts);
+    $("#find-trusts").on('change', findNhsTrusts);
 }());
