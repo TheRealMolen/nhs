@@ -23,4 +23,16 @@ body {
     font-weight: bold;
 }
 
+.btn-group .btn-primary:not(.active) {
+    color: #444;
+    background-color: #6489b1;
+    border-color: #7e90a2;
+}
+
+.btn-group .btn-primary:not(:disabled):not(.disabled).active {
+    color: white;
+    background-color: #007bff;
+    border-color: #75b7ff;
+}
+
 
